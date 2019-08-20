@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  server:
+    image: nginx
+    container_name: app-nginx
+    volumes:
+      - ./backend:/var/www/html
+      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 8080:80
+    networks:
+      - backend
+      - frontend
+
+  app:
+    build: ./.docker/php
+    image: php:7.2
+    container_name: app-php
+    volumes:
+      - ./backend:/var/www/html:rw
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:5.7
+    container_name: app-mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: automaticket
+      MYSQL_USER: automaticket
+      MYSQL_PASSWORD: automaticket
+      MYSQL_ROOT_PASSWORD: automaticket
+    volumes:
+      - ./.docker/dbdata:/var/lib/mysql
+    networks:
+      - backend
+
+  node:
+    build: ./.docker/node
+    image: node
+    container_name: app-node
+    ports:
+      - 8090:8090
+    volumes:
+      - ./frontend:/home/node/app:rw
+    user: "node"
+    working_dir: /home/node/app
+    command: bash -c "npm install && npm run prod"
+    networks:
+      - frontend
+
+networks:
+  backend:
+  frontend:
