@@ -6,10 +6,13 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import VueSweetalert2 from 'vue-sweetalert2';
+import VueSweetalert2 from 'vue-sweetalert2'
+import ViaCep from 'vue-viacep'
 
 Vue.use(BootstrapVue)
 Vue.use(VueSweetalert2)
+Vue.use(ViaCep);
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
