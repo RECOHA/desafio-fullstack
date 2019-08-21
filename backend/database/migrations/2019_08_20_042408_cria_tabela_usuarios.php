@@ -24,7 +24,7 @@ class CriaTabelaUsuarios extends Migration
             $table->string('usu_telefone');
             $table->string('usu_cep');
             $table->string('usu_logradouro');
-            $table->string('usu_numero');
+            $table->string('usu_numero')->nullable();
             $table->string('usu_complemento')->nullable();
             $table->string('usu_bairro');
             $table->string('usu_cidade');
