@@ -255,13 +255,20 @@ export default {
                 'usu_cidade': this.novoUsuario.usu_cidade
             }
             http.post('/usuarios/novo', JSON).then(response => {
+                this.usuarios.unshift({
+                    'codigo'          : this.novoUsuario.usu_codigo,
+                    'nome'            : this.novoUsuario.usu_nome,
+                    'cpf'             : this.novoUsuario.usu_cpf,
+                    'data_nascimento' : new Date(Date.parse(this.novoUsuario.usu_data_nascimento)).toLocaleDateString('pt-BR'),
+                    'cidade'          : this.novoUsuario.usu_cidade,
+                });
+                this.fecharModal();
                 Swal.fire({
                     title: 'Sucesso!',
                     text: response.mensagem,
                     type: 'success',
                     confirmButtonText: 'Ok!',
                 })
-                this.fecharModal();
             })
             .catch(error => {
                 Swal.fire({
