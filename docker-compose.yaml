@@ -47,7 +47,7 @@ services:
       - ./frontend:/home/node/app:rw
     user: "node"
     working_dir: /home/node/app
-    command: bash -c "npm install && npm run prod"
+    command: bash -c "npm install && npm run dev"
     networks:
       - frontend
 
